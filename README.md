@@ -10,7 +10,7 @@
 
 ## Description ##
 
-Adds custom functionality for use on http://www.liquidchurch.com/
+Adds custom functionality for use on http://www.liquidchurch.com
 
 ## Installation ##
 

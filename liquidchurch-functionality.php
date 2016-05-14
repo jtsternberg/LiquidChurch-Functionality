@@ -2,7 +2,7 @@
 /**
  * Plugin Name: LiquidChurch Functionality
  * Plugin URI:  http://www.liquidchurch.com/
- * Description: Adds custom functionality for use on http://www.liquidchurch.com/
+ * Description: Adds custom functionality for use on http://www.liquidchurch.com
  * Version:     0.0.0
  * Author:      Justin Sternberg
  * Author URI:  http://dsgnwrks.pro

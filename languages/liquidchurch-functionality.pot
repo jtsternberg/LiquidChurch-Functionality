@@ -81,7 +81,7 @@ msgid "http://www.liquidchurch.com/"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "Adds custom functionality for use on http://www.liquidchurch.com/"
+msgid "Adds custom functionality for use on http://www.liquidchurch.com"
 msgstr ""
 
 #. Author of the plugin/theme

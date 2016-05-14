@@ -2,7 +2,7 @@
   "generator-plugin-wp": {
     "name": "LiquidChurch Functionality",
     "homepage": "http://www.liquidchurch.com/",
-    "description": "Adds custom functionality for use on http://www.liquidchurch.com/",
+    "description": "Adds custom functionality for use on http://www.liquidchurch.com",
     "version": "0.0.0",
     "author": "Justin Sternberg",
     "authoremail": "justin@dsgnwrks.pro",
