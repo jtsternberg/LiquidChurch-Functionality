@@ -1,0 +1,93 @@
+# Copyright (C) 2016 Justin Sternberg
+# This file is distributed under the GPLv2.
+msgid ""
+msgstr ""
+"Project-Id-Version: LiquidChurch Functionality 0.0.0\n"
+"Report-Msgid-Bugs-To: "
+"https://wordpress.org/support/plugin/liquidchurch-functionality\n"
+"POT-Creation-Date: 2016-05-14 17:33:50+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: grunt-wp-i18n 0.5.4\n"
+
+#: includes/class-metaboxes.php:58
+msgid "Additional Resources"
+msgstr ""
+
+#: includes/class-metaboxes.php:67
+msgid "Resource {#}"
+msgstr ""
+
+#: includes/class-metaboxes.php:68
+msgid "Add Another Resource"
+msgstr ""
+
+#: includes/class-metaboxes.php:69
+msgid "Remove Resource"
+msgstr ""
+
+#: includes/class-metaboxes.php:76
+msgid "Resource Name"
+msgstr ""
+
+#: includes/class-metaboxes.php:77
+msgid "e.g., \"Audio for Faces of Grace Sermon\")"
+msgstr ""
+
+#: includes/class-metaboxes.php:82
+msgid "Display Name"
+msgstr ""
+
+#: includes/class-metaboxes.php:83
+msgid "e.g., \"Download Audio\""
+msgstr ""
+
+#: includes/class-metaboxes.php:88
+msgid "URL or File"
+msgstr ""
+
+#: includes/class-metaboxes.php:89
+msgid ""
+"e.g., \"I want to link to an audio sermon OR I want to upload an audio "
+"sermon\""
+msgstr ""
+
+#: includes/class-metaboxes.php:94
+msgid "Type of Resource"
+msgstr ""
+
+#: includes/class-metaboxes.php:95
+msgid "e.g., Video / Audio / PDF / ZIP / Other"
+msgstr ""
+
+#: liquidchurch-functionality.php:252
+msgid ""
+"LiquidChurch Functionality is missing the <a "
+"href=\"https://github.com/jtsternberg/GC-Sermons\">GC Sermons plugin</a> "
+"and has been <a href=\"%s\">deactivated</a>. Please make sure all "
+"requirements are available."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "LiquidChurch Functionality"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.liquidchurch.com/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Adds custom functionality for use on http://www.liquidchurch.com/"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Justin Sternberg"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://dsgnwrks.pro"
+msgstr ""

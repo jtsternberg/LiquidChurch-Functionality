@@ -104,6 +104,14 @@ final class LiquidChurch_Functionality {
 	protected static $single_instance = null;
 
 	/**
+	 * Instance of LCF_Metaboxes
+	 *
+	 * @since NEXT
+	 * @var LCF_Metaboxes
+	 */
+	protected $metaboxes;
+
+	/**
 	 * Creates or returns an instance of this class.
 	 *
 	 * @since  NEXT
@@ -136,7 +144,11 @@ final class LiquidChurch_Functionality {
 	 */
 	public function plugin_classes() {
 		// Attach other plugin classes to the base plugin class.
-		// $this->plugin_class = new LCF_Plugin_Class( $this );
+		if ( is_admin() ) {
+			$this->metaboxes = new LCF_Metaboxes( $this );
+			$this->metaboxes->hooks();
+		}
+
 	} // END OF PLUGIN CLASSES FUNCTION
 
 	/**
@@ -256,6 +268,7 @@ final class LiquidChurch_Functionality {
 			case 'basename':
 			case 'url':
 			case 'path':
+			case 'metaboxes':
 				return $this->$field;
 			default:
 				throw new Exception( 'Invalid '. __CLASS__ .' property: ' . $field );

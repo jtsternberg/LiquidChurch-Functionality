@@ -17,7 +17,9 @@
 		"grunt-contrib-clean": "latest",
 		"grunt-contrib-compress": "latest",
 		"grunt-wp-deploy": "latest",
-		"load-grunt-tasks": "latest"
+		"load-grunt-tasks": "latest",
+		"grunt-contrib-uglify": "latest",
+		"gruntify-eslint": "latest"
 	},
 	"scripts": {
 		"test": "dockunit",
