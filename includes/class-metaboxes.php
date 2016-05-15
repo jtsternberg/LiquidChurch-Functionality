@@ -21,6 +21,22 @@ class LCF_Metaboxes {
 	protected $plugin = null;
 
 	/**
+	 * Additional Resources CMB2 id.
+	 *
+	 * @var   string
+	 * @since NEXT
+	 */
+	public $resources_box_id = 'gc_addtl_resources_metabox';
+
+	/**
+	 * Additional Resources meta id.
+	 *
+	 * @var   string
+	 * @since NEXT
+	 */
+	public $resources_meta_id = 'gc_addtl_resources';
+
+	/**
 	 * Constructor
 	 *
 	 * @since  NEXT
@@ -51,16 +67,15 @@ class LCF_Metaboxes {
 	public function add_metabox( $metabox ) {
 
 		$cmb = new_cmb2_box( array(
-			'id'           => 'gc_addtl_resources_metabox',
+			'id'           => $this->resources_box_id,
 			'title'        => __( 'Additional Resources', 'gc-sermons' ),
 			'object_types' => array( gc_sermons()->sermons->post_type() ),
 		) );
 
 		$group_field_id = $cmb->add_field( array(
-			'id'   => 'gc_addtl_resources',
-			// 'name' => __( 'Additional Resources', 'lc-func' ),
-			'type'        => 'group',
-			'options'     => array(
+			'id'      => $this->resources_meta_id,
+			'type'    => 'group',
+			'options' => array(
 				'group_title'   => __( 'Resource {#}', 'lc-func' ), // {#} gets replaced by row number
 				'add_button'    => __( 'Add Another Resource', 'lc-func' ),
 				'remove_button' => __( 'Remove Resource', 'lc-func' ),
@@ -70,26 +85,29 @@ class LCF_Metaboxes {
 		) );
 
 		$cmb->add_group_field( $group_field_id, array(
-			'name' => __( 'Resource Name', 'cmb2' ),
-			'desc' => __( 'e.g., "Audio for Faces of Grace Sermon")', 'lc-func' ),
+			'name' => __( 'Resource Name', 'lc-func' ),
+			'desc' => __( 'e.g., "Audio for Faces of Grace Sermon"', 'lc-func' ),
 			'id'   => 'name',
 			'type' => 'text',
 		) );
+
 		$cmb->add_group_field( $group_field_id, array(
-			'name' => __( 'Display Name', 'cmb2' ),
-			'desc' => __( 'e.g., "Download Audio"', 'lc-func' ),
-			'id'   => 'display_name',
-			'type' => 'text',
+			'name'    => __( 'Display Name', 'lc-func' ),
+			'desc'    => __( 'e.g., "Download Audio"', 'lc-func' ),
+			'id'      => 'display_name',
+			'type'    => 'text',
 		) );
+
 		$cmb->add_group_field( $group_field_id, array(
-			'name' => __( 'URL or File', 'cmb2' ),
-			'desc' => __( 'e.g., "I want to link to an audio sermon OR I want to upload an audio sermon"', 'lc-func' ),
+			'name' => __( 'URL or File', 'lc-func' ),
+			'desc' => __( 'Link to OR upload OR select resource"', 'lc-func' ),
 			'id'   => 'file',
 			'type' => 'file',
 		) );
+
 		$cmb->add_group_field( $group_field_id, array(
-			'name' => __( 'Type of Resource', 'cmb2' ),
-			'desc' => __( 'e.g., Video / Audio / PDF / ZIP / Other', 'lc-func' ),
+			'name' => __( 'Type of Resource', 'lc-func' ),
+			'desc' => __( 'e.g., image / video / audio / pdf / zip / other. Will autopopulate if selecting media.', 'lc-func' ),
 			'id'   => 'type',
 			'type' => 'text',
 		) );
