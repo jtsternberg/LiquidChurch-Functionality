@@ -17,8 +17,18 @@ window.LiquidChurchAdmin = window.LiquidChurchAdmin || {};
 		plugin.selectFile = function() {
 			var selection = media.frames[ media.field ].state().get( 'selection' );
 			var attachment = selection.first().toJSON();
+			var ext = attachment.filename ? attachment.filename.split( '.' ).pop() : 'unknown';
+			var type = attachment.type || ext;
 
-			var type = attachment.type || attachment.filename.split( '.' ).pop();
+			if ( 'application' === type ) {
+				switch ( ext ) {
+					case 'pdf':
+					case 'zip':
+						type = ext;
+						break;
+					default:
+				}
+			}
 
 			$group.find( '.cmb-type-text .regular-text' ).val( type );
 		};
