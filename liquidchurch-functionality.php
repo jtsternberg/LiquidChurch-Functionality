@@ -112,6 +112,14 @@ final class LiquidChurch_Functionality {
 	protected $metaboxes;
 
 	/**
+	 * Instance of LCF_Shortcodes
+	 *
+	 * @since NEXT
+	 * @var LCF_Shortcodes
+	 */
+	protected $shortcodes;
+
+	/**
 	 * Creates or returns an instance of this class.
 	 *
 	 * @since  NEXT
@@ -149,6 +157,7 @@ final class LiquidChurch_Functionality {
 			$this->metaboxes->hooks();
 		}
 
+		$this->shortcodes = new LCF_Shortcodes( $this );
 	} // END OF PLUGIN CLASSES FUNCTION
 
 	/**
@@ -269,6 +278,7 @@ final class LiquidChurch_Functionality {
 			case 'url':
 			case 'path':
 			case 'metaboxes':
+			case 'shortcodes':
 				return $this->$field;
 			default:
 				throw new Exception( 'Invalid '. __CLASS__ .' property: ' . $field );
