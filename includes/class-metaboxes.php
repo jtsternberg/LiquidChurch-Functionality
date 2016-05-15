@@ -26,7 +26,7 @@ class LCF_Metaboxes {
 	 * @var   string
 	 * @since NEXT
 	 */
-	public $resources_box_id = 'gc_addtl_resources_metabox';
+	public $resources_box_id = '';
 
 	/**
 	 * Additional Resources meta id.
@@ -34,7 +34,7 @@ class LCF_Metaboxes {
 	 * @var   string
 	 * @since NEXT
 	 */
-	public $resources_meta_id = 'gc_addtl_resources';
+	public $resources_meta_id = '';
 
 	/**
 	 * Constructor

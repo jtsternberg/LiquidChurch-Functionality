@@ -52,7 +52,7 @@ function lc_func_autoload_classes( $class_name ) {
 		substr( $class_name, strlen( 'LCF_' ) )
 	) );
 
-	LiquidChurch_Functionality::include_file( $filename );
+	LiquidChurch_Functionality::include_file( 'includes/class-' . $filename );
 }
 spl_autoload_register( 'lc_func_autoload_classes' );
 
@@ -151,11 +151,17 @@ final class LiquidChurch_Functionality {
 	 * @return void
 	 */
 	public function plugin_classes() {
-		// Attach other plugin classes to the base plugin class.
+		// Only create the full metabox object if in the admin.
 		if ( is_admin() ) {
 			$this->metaboxes = new LCF_Metaboxes( $this );
 			$this->metaboxes->hooks();
+		} else {
+			$this->metaboxes = (object) array();
 		}
+
+		// Set these properties either way.
+		$this->metaboxes->resources_box_id  = 'gc_addtl_resources_metabox';
+		$this->metaboxes->resources_meta_id = 'gc_addtl_resources';
 
 		$this->shortcodes = new LCF_Shortcodes( $this );
 	} // END OF PLUGIN CLASSES FUNCTION
@@ -293,7 +299,7 @@ final class LiquidChurch_Functionality {
 	 * @return bool   Result of include call.
 	 */
 	public static function include_file( $filename ) {
-		$file = self::dir( 'includes/class-'. $filename .'.php' );
+		$file = self::dir( $filename .'.php' );
 		if ( file_exists( $file ) ) {
 			return include_once( $file );
 		}

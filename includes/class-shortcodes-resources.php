@@ -36,12 +36,13 @@ class LCF_Shortcodes_Resources {
 	 */
 	public function __construct( $plugin ) {
 		$this->run = new LCF_Shortcodes_Resources_Run();
-		$this->run->meta_id = $plugin->metaboxes->resources_meta_id;
-
-		$this->admin = new LCF_Shortcodes_Resources_Admin( $this->run );
-
+		$this->run->init( $plugin->metaboxes->resources_meta_id );
 		$this->run->hooks();
-		$this->admin->hooks();
+
+		if ( is_admin() ) {
+			$this->admin = new LCF_Shortcodes_Resources_Admin( $this->run );
+			$this->admin->hooks();
+		}
 	}
 
 }
