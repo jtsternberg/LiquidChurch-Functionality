@@ -30,7 +30,7 @@ window.LiquidChurchAdmin = window.LiquidChurchAdmin || {};
 				}
 			}
 
-			$group.find( '.cmb-type-text .regular-text' ).val( type );
+			$group.find( '.cmb-type-text' ).last().find( '.regular-text' ).val( type );
 		};
 
 		plugin.setupTypeListener = function( $row ) {
