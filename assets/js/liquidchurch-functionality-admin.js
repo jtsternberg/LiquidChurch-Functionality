@@ -14,7 +14,7 @@ window.LiquidChurchAdmin = window.LiquidChurchAdmin || {};
 		var box = document.getElementById( plugin.id + '_repeat' );
 		var $group;
 
-		var selectFile = function() {
+		plugin.selectFile = function() {
 			var selection = media.frames[ media.field ].state().get( 'selection' );
 			var attachment = selection.first().toJSON();
 
@@ -23,7 +23,7 @@ window.LiquidChurchAdmin = window.LiquidChurchAdmin || {};
 			$group.find( '.cmb-type-text .regular-text' ).val( type );
 		};
 
-		var setupTypeListener = function( $row ) {
+		plugin.setupTypeListener = function( $row ) {
 			var frameID = $row.find( '.cmb2-upload-file' ).attr( 'id' );
 
 			$group = $row.closest( '.cmb-nested.cmb-field-list' );
@@ -33,18 +33,18 @@ window.LiquidChurchAdmin = window.LiquidChurchAdmin || {};
 
 				if ( frame && ! frame.setResourceType ) {
 					frame.setResourceType = true;
-					frame.on( 'select', selectFile );
+					frame.on( 'select', plugin.selectFile );
 				}
 			}, 500 );
 		};
 
-		var clickButton = function() {
+		plugin.clickButton = function() {
 			if ( $.contains( box, this ) ) {
-				setupTypeListener( $( this ).closest( '.cmb-td' ) );
+				plugin.setupTypeListener( $( this ).closest( '.cmb-td' ) );
 			}
 		};
 
-		cmb.metabox().on( 'click', '.cmb2-upload-button', clickButton );
+		cmb.metabox().on( 'click', '.cmb2-upload-button', plugin.clickButton );
 	};
 
 	$( plugin.init );

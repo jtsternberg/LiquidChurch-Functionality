@@ -101,7 +101,7 @@ class LCF_Metaboxes {
 
 		wp_enqueue_script(
 			'lc-func-admin',
-			LiquidChurch_Functionality::url( "assets/js/liquidchurch-functionality{$min}.js" ),
+			LiquidChurch_Functionality::url( "assets/js/liquidchurch-functionality-admin{$min}.js" ),
 			array( 'cmb2-scripts' ),
 			LiquidChurch_Functionality::VERSION,
 			1
