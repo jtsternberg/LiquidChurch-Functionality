@@ -94,7 +94,7 @@ class LCF_Shortcodes_Resources_Run extends WDS_Shortcodes {
 			$args[ $key ] = $this->att( $key );
 		}
 
-		return $this->view( 'sermon-resources-shortcode', $args );
+		return LCF_Template_Loader::get_template( 'sermon-resources-shortcode', $args );
 	}
 
 	protected function get_resources( $post_id ) {
@@ -109,19 +109,14 @@ class LCF_Shortcodes_Resources_Run extends WDS_Shortcodes {
 			$resource['do_display_name'] = $resource_display_name;
 
 			$type = isset( $resource['type'] ) ? $resource['type'] : '';
-			$resource['item'] = $this->view( 'sermon-resources-shortcode-item', $type, $resource );
+			$resource['item'] = LCF_Template_Loader::get_template( 'sermon-resources-shortcode-item', $type, $resource );
 
 			$resource['index'] = $index;
 
-			$items .= $this->view( 'sermon-resources-shortcode-li', $resource );
+			$items .= LCF_Template_Loader::get_template( 'sermon-resources-shortcode-li', $resource );
 		}
 
 		return $items;
-	}
-
-	public function view( $template, $name = null, array $args = array() ) {
-		$view = new LCF_Template_Loader( $template, $name, $args );
-		return $view->load();
 	}
 
 }

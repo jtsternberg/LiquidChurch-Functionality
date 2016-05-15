@@ -173,7 +173,6 @@ final class LiquidChurch_Functionality {
 	 * @return void
 	 */
 	public function hooks() {
-
 		add_action( 'init', array( $this, 'init' ) );
 	}
 
