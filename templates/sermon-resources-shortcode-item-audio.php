@@ -1,7 +1,4 @@
-<a style="color: red;" href="<?php $this->output( 'file', 'esc_url' ); ?>">
-	<?php if ( $this->get( 'do_display_name' ) ) : ?>
-		<?php $this->output( 'display_name' ); ?>
-	<?php else : ?>
-		<?php $this->output( 'name' ); ?>
-	<?php endif; ?>
-</a>
+<?php if ( $audio_player = wp_audio_shortcode( array( 'src' => esc_url( $this->get( 'file' ) ) ) ) ) : ?>
+	<div class="audio-wrap"><?php echo $audio_player; ?></div><!-- .audio-wrap -->
+<?php endif; ?>
+
