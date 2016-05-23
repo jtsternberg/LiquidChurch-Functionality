@@ -150,6 +150,9 @@ class LCF_Shortcodes_Resources_Run extends WDS_Shortcodes {
 			$resource['do_display_name'] = $resource_display_name;
 
 			$type = isset( $resource['type'] ) ? $resource['type'] : '';
+			if ( 'video' === $type && isset( $resource['file'] ) ) {
+				$resource['embed_args'] = array( 'url' => $resource['file'] );
+			}
 			$resource['item'] = LCF_Template_Loader::get_template( 'sermon-resources-shortcode-item', $type, $resource );
 
 			$resource['index'] = $index;
