@@ -107,7 +107,7 @@ class LCF_Metaboxes {
 
 		$cmb->add_group_field( $group_field_id, array(
 			'name' => __( 'Type of Resource', 'lc-func' ),
-			'desc' => __( 'e.g., image / video / audio / pdf / zip / other. Will autopopulate if selecting media.', 'lc-func' ),
+			'desc' => __( 'e.g., image / video / audio / pdf / zip / other. Will autopopulate if selecting media. Leave blank if adding a URL instead of a file.', 'lc-func' ),
 			'id'   => 'type',
 			'type' => 'text',
 		) );

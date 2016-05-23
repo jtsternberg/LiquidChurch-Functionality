@@ -35,9 +35,7 @@ class LCF_Shortcodes_Resources_Run extends WDS_Shortcodes {
 	 * @since 0.1.0
 	 */
 	public $atts_defaults = array(
-		'resource_type'          => 'all', // File or URL
 		'resource_type'          => array( 'files', 'urls', ), // File or URL
-		// 'resource_file_type'     => 'all', // Only applies if 'type' is 'file',
 		'resource_file_type'     => array( 'image', 'video', 'audio', 'pdf', 'zip', 'other', ), // Only applies if 'type' is 'file',
 		'resource_display_name'  => false, // Uses Resource Name by default
 		'resource_post_id'       => 0, // Uses `get_the_id()` by default
@@ -75,9 +73,6 @@ class LCF_Shortcodes_Resources_Run extends WDS_Shortcodes {
 			return '<!-- no resources found -->';
 		}
 
-		// $types = $this->att( 'resource_type' );
-		// $file_types = $this->att( 'resource_file_type' );
-
 		$resources = $this->get_resources( $post_id );
 
 		if ( empty( $resources ) || ! is_array( $resources ) ) {
@@ -98,7 +93,53 @@ class LCF_Shortcodes_Resources_Run extends WDS_Shortcodes {
 	}
 
 	protected function get_resources( $post_id ) {
-		return get_post_meta( $post_id, $this->meta_id, 1 );
+		$resources = get_post_meta( $post_id, $this->meta_id, 1 );
+
+		$allowed_types = $this->att( 'resource_type' );
+
+		$diff_types      = array_diff( $this->atts_defaults['resource_type'], $allowed_types );
+		$diff_file_types = array_diff( $this->atts_defaults['resource_file_type'], $this->att( 'resource_file_type' ) );
+
+		if ( empty( $diff_types ) && empty( $diff_file_types ) ) {
+			// Ok, send it all back.
+			return $resources;
+		}
+
+		$obj = $this->shortcode_object;
+		$obj->wants_urls = in_array( 'urls', $allowed_types );
+		$obj->wants_files = in_array( 'files', $allowed_types );
+
+		if ( ! $obj->wants_files && ! $obj->wants_urls ) {
+			// Ok.. you asked for it, send nothing back.
+			return array();
+		}
+
+		if ( ! $obj->wants_files ) {
+
+			// send only urls
+			// we can ignore file types.
+			return array_filter( $resources, array( $this, 'is_url_resource' ) );
+		}
+
+		// filter rest
+		return array_filter( $resources, array( $this, 'filter_resources_by_types' ) );
+	}
+
+	public function filter_resources_by_types( $resource ) {
+
+		// If this is a url resource
+		if ( $this->is_url_resource( $resource ) ) {
+			// Then check if urls are allowed
+			return $this->shortcode_object->wants_urls;
+		}
+
+		// Ok, we have a file type, but is it the requested file type?
+		return in_array( $resource['type'], (array) $this->att( 'resource_file_type' ) );
+	}
+
+	public function is_url_resource( $resource ) {
+		$is_url = ! isset( $resource['type'] ) || ! trim( $resource['type'] );
+		return $is_url;
 	}
 
 	protected function list_items( $resources, $resource_display_name ) {
@@ -120,57 +161,3 @@ class LCF_Shortcodes_Resources_Run extends WDS_Shortcodes {
 	}
 
 }
-
-/*
-
-$this->args: Array
-(
-    [name] => A picture of freedom
-    [display_name] => View Picture
-    [file_id] => 17232
-    [file] => http://dev.generations/wp-content/uploads/2010/08/82171660_960x540.jpg
-    [type] => image
-    [index] => 0
-)
-
-
-$args: Array
-(
-    [resources] => Array
-        (
-            [0] => Array
-                (
-                    [name] => A picture of freedom
-                    [display_name] => View Picture
-                    [file_id] => 17232
-                    [file] => http://dev.generations/wp-content/uploads/2010/08/82171660_960x540.jpg
-                    [type] => image
-                )
-
-            [1] => Array
-                (
-                    [name] => Some audio
-                    [display_name] => Download Audio
-                    [file_id] => 6797
-                    [file] => http://dev.generations/wp-content/uploads/2014/10/Troy-Oct-5th-2014.mp3
-                    [type] => audio
-                )
-
-        )
-
-    [items] => <li id="gc-sermon-resources-list-item-0" class="gc-sermon-resources-list-item gc-sermon-resources-list-item-image">
-	<a href="http://dev.generations/wp-content/uploads/2010/08/82171660_960x540.jpg">
-					A picture of freedom			</a>
-</li>
-<li id="gc-sermon-resources-list-item-1" class="gc-sermon-resources-list-item gc-sermon-resources-list-item-audio">
-	<a href="http://dev.generations/wp-content/uploads/2014/10/Troy-Oct-5th-2014.mp3">
-					Some audio			</a>
-</li>
-
-    [resource_type] => |~'files','urls'~|
-    [resource_file_type] => |~'image','video','audio','pdf','zip','other'~|
-    [resource_display_name] => true
-    [resource_post_id] => 8861
-    [resource_extra_classes] => class123
-)
-*/
