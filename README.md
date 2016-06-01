@@ -12,6 +12,18 @@
 
 Adds custom functionality for use on http://www.liquidchurch.com
 
+To add 'Resources' output to your theme, you can use the shortcode, or use `do_action`:
+
+For example, to output all of the resource types, you could put the following in your single template file:
+
+```php
+<?php do_action( 'sermon_resources', array(
+	'resource_type'      => array( 'files', 'urls' ),
+	'resource_file_type' => array( 'image', 'video', 'audio', 'pdf', 'zip', 'other' ),
+	'resource_post_id'   => get_the_id(),
+) ); ?>
+```
+
 ## Installation ##
 
 ### Manual Installation ###
