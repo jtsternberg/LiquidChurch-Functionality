@@ -66,13 +66,13 @@ class LCF_Metaboxes {
 
 	public function add_metabox( $metabox ) {
 
-		$cmb = new_cmb2_box( array(
+		$args = array(
 			'id'           => $this->resources_box_id,
 			'title'        => __( 'Additional Resources', 'gc-sermons' ),
 			'object_types' => array( gc_sermons()->sermons->post_type() ),
-		) );
+		);
 
-		$group_field_id = $cmb->add_field( array(
+		$field_group_args = array(
 			'id'      => $this->resources_meta_id,
 			'type'    => 'group',
 			'options' => array(
@@ -82,35 +82,61 @@ class LCF_Metaboxes {
 				'sortable'      => true,
 			),
 			'after_group' => array( $this, 'enqueu_box_js' ),
+		);
+
+		$sub_fields = array(
+			array(
+				'name' => __( 'Resource Name', 'lc-func' ),
+				'desc' => __( 'e.g., "Audio for Faces of Grace Sermon"', 'lc-func' ),
+				'id'   => 'name',
+				'type' => 'text',
+			),
+			array(
+				'name'    => __( 'Display Name', 'lc-func' ),
+				'desc'    => __( 'e.g., "Download Audio"', 'lc-func' ),
+				'id'      => 'display_name',
+				'type'    => 'text',
+			),
+			array(
+				'name' => __( 'URL or File', 'lc-func' ),
+				'desc' => __( 'Link to OR upload OR select resource"', 'lc-func' ),
+				'id'   => 'file',
+				'type' => 'file',
+			),
+			array(
+				'name' => __( 'Type of Resource', 'lc-func' ),
+				'desc' => __( 'e.g., image / video / audio / pdf / zip / embed / other. Will autopopulate if selecting media. Leave blank if adding a URL instead of a file.', 'lc-func' ),
+				'id'   => 'type',
+				'type' => 'text',
+			),
+		);
+
+		$cmb = new_cmb2_box( $args );
+		$group_field_id = $cmb->add_field( $field_group_args );
+		foreach ( $sub_fields as $field ) {
+			$cmb->add_group_field( $group_field_id, $field );
+		}
+
+
+		// Include the same field for sermon series.
+
+		$cmb = new_cmb2_box( array(
+			'id'           => $this->resources_box_id . '_series',
+			'object_types' => array( 'term' ),
+			'taxonomies'   => array( gc_sermons()->taxonomies->series->taxonomy() ),
 		) );
 
-		$cmb->add_group_field( $group_field_id, array(
-			'name' => __( 'Resource Name', 'lc-func' ),
-			'desc' => __( 'e.g., "Audio for Faces of Grace Sermon"', 'lc-func' ),
-			'id'   => 'name',
-			'type' => 'text',
+		$cmb->add_field( array(
+			'name' => $args['title'],
+			'desc' => '<hr>',
+			'id'   => 'series_resources_title',
+			'type' => 'title',
 		) );
 
-		$cmb->add_group_field( $group_field_id, array(
-			'name'    => __( 'Display Name', 'lc-func' ),
-			'desc'    => __( 'e.g., "Download Audio"', 'lc-func' ),
-			'id'      => 'display_name',
-			'type'    => 'text',
-		) );
-
-		$cmb->add_group_field( $group_field_id, array(
-			'name' => __( 'URL or File', 'lc-func' ),
-			'desc' => __( 'Link to OR upload OR select resource"', 'lc-func' ),
-			'id'   => 'file',
-			'type' => 'file',
-		) );
-
-		$cmb->add_group_field( $group_field_id, array(
-			'name' => __( 'Type of Resource', 'lc-func' ),
-			'desc' => __( 'e.g., image / video / audio / pdf / zip / embed / other. Will autopopulate if selecting media. Leave blank if adding a URL instead of a file.', 'lc-func' ),
-			'id'   => 'type',
-			'type' => 'text',
-		) );
+		$group_field_id = $cmb->add_field( $field_group_args );
+		foreach ( $sub_fields as $field ) {
+			$cmb->add_group_field( $group_field_id, $field );
+		}
 
 	}
 
