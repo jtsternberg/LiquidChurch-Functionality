@@ -67,7 +67,10 @@ class LCF_Shortcodes_Resources_Run extends WDS_Shortcodes {
 
 	protected function _shortcode() {
 
-		$post_id = $this->att( 'post_id', get_the_id() );
+		$post_id = $this->att( 'resource_post_id', get_the_id() );
+		if ( 'this' === $post_id ) {
+			$post_id = get_the_id();
+		}
 
 		if ( ! $post_id ) {
 			return '<!-- no resources found -->';

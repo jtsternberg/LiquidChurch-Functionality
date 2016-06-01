@@ -103,7 +103,7 @@ class LCF_Shortcodes_Resources_Admin extends WDS_Shortcode_Admin {
 		// );
 		$fields[] = array(
 			'name'            => __( 'Sermon ID', 'lc-func' ),
-			'desc'            => __( 'Blank, "recent", or "0" will play the most recent video. Otherwise enter a post ID. click the magnifying glass to search for a Sermon post.', 'lc-func' ),
+			'desc'            => __( 'If nothing is selected, it will use <code>get_the_id()</code>', 'lc-func' ),
 			'id'              => 'resource_post_id',
 			'type'            => 'post_search_text',
 			'post_type'       => gc_sermons()->sermons->post_type(),
